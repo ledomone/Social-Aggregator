@@ -7,19 +7,13 @@
 
     <script src="/lib/jquery/dist/jquery.js"></script>
     <script src="/lib/bootstrap/dist/js/bootstrap.js"></script>
-
     <meta charset="utf-8">
     <title></title>
   </head>
   <body>
-    <div class="">
-      <%=title%>
-      <ul>
-        <li>
-          <a href="/auth/google" class="googleplus"><i class="fa fa-google-plus"></i></a>
-        </li>
-      </ul>
+    <div>
+      <img src="<%=user.image%>">
+      <%=user.name%>
     </div>
-
   </body>
 </html>
