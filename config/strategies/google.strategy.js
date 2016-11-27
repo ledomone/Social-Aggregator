@@ -9,7 +9,6 @@ module.exports = function() {
       callbackURL: 'http://localhost:3000/auth/google/callback'
     },
     function(req, accessToken, refreshToken, profile, done) {
-      var user = {};
       var query = {
         'google.id': profile.id
       };
