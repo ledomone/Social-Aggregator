@@ -1,24 +1,38 @@
 var passport = require('passport'),
   FacebookStrategy = require('passport-facebook').Strategy;
+var User = require('../../models/userModel');
+
 
 module.exports = function() {
   passport.use(new FacebookStrategy({
     clientID: '1166796340102669',
     clientSecret: 'fa4e0a6cf99205901034ca5b0d10d9c9',
     callbackURL: 'http://localhost:3000/auth/facebook/callback',
-    profileFields: ['id', 'emails', 'displayName', 'name', 'gender'] 
+    profileFields: ['id', 'emails', 'displayName', 'name', 'gender']
   },
   function(req, accessToken, refreshToken, profile, done){
-    var user = {};
+    var query = {
+      'facebook.id': profile.id
+    };
 
-    user.email = profile.emails[0].value;
-    user.displayName = profile.displayName;
+    User.findOne(query, function(error, user) {
+      if (user) {
+        console.log('found!');
+        done(null, user);
+      } else {
+        console.log('not found');
+        var user = new User;
 
-    user.facebook = {};
-    user.facebook.id = profile.id;
-    user.facebook.token = accessToken;
+        user.email = profile.emails[0].value;
+        user.displayName = profile.displayName;
 
-    done(null, user);
+        user.facebook = {};
+        user.facebook.id = profile.id;
+        user.facebook.token = accessToken;
 
+        user.save();
+        done(null, user);
+      }
+    });
   }));
 }
