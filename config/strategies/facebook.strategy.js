@@ -8,12 +8,11 @@ module.exports = function() {
             clientID: '1166796340102669',
             clientSecret: 'fa4e0a6cf99205901034ca5b0d10d9c9',
             callbackURL: 'http://localhost:3000/auth/facebook/callback',
+            passReqToCallback: true,
             profileFields: ['id', 'emails', 'displayName', 'name', 'gender']
         },
         function(req, accessToken, refreshToken, profile, done) {
-            console.log('req -->>>> user   : ' + req.user);
             if (req.user) {
-                console.log('req.user: ' + req.user);
                 // already logged in (another social account)
                 var query = {};
                 if (req.user.google) {
