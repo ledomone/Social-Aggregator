@@ -14,6 +14,10 @@
     <div>
       <img src="<%=user.image%>">
       <%=user.displayName%>
+      <%=user.name%>
+      <% if(user.facebook){%>
+        <img src="<%user.facebook.image%>">
+      <%}%>
       <div class="">
         <ul class="social list-inline">
           <li>

@@ -1,4 +1,4 @@
-var OAuth = require('OAuth').OAuth2;
+var OAuth = require('oauth').OAuth2;
 
 var Facebook = function (facebookKey, facebookSecret) {
 
@@ -23,8 +23,19 @@ var Facebook = function (facebookKey, facebookSecret) {
     );
   }
 
+  var getFriends = function(userKey, done) {
+    oauth.get(
+      'https://graph.facebook.com/v2.8/me/friends?redirect=false',
+      userKey,
+      function(err, results, res) {
+        results = JSON.parse(results);
+        done(results.summary);
+      }
+    );
+  }
+
   return {
-    getImage: getImage;
+    getImage: getImage
   }
 }
 
