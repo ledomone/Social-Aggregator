@@ -15,6 +15,8 @@ module.exports = function() {
       User.findOne(query, function(error, user) {
         if (user) {
           console.log('found!');
+          user.displayName = profile.displayName;
+          user.save();
           done(null, user);
         } else {
           console.log('not found');
