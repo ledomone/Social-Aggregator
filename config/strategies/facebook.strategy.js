@@ -31,6 +31,8 @@ module.exports = function() {
                         user.facebook.id = profile.id;
                         user.facebook.token = accessToken;
 
+                        user.displayName = profile.displayName;
+
                         user.save();
                         done(null, user);
                     }
