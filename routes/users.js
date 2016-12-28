@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var facebook = require('../services/facebook')
-('1166796340102669', 'fa4e0a6cf99205901034ca5b0d10d9c9');
+(process.env.FACEBOOK_CLIENTID, process.env.FACEBOOK_CLIENTSECRET);
 
 
 router.use('/', function(req, res, next) {
